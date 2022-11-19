@@ -1,22 +1,73 @@
-import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import * as React from 'react';
+import {
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+} from 'react-router-dom';
+import { fakeAuthProvider } from './auth';
 import Authorization from './pages/Authorization/Authorization';
-import ErrorPage from './pages/Error/Error';
+import Users from './pages/Users/Users';
+import PageLayout from './components/PageLayout/PageLayout';
 
-function App() {
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Authorization />,
-      errorElement: <ErrorPage />,
-    },
-  ], { basename: '/frontend' });
-
+export default function App() {
   return (
-    <div className="App">
-      <RouterProvider router={router} />
-    </div>
+    <AuthProvider>
+      <Routes>
+          <Route path="/login" element={<Authorization />} />
+        <Route element={<RequireAuth><PageLayout /></RequireAuth>}>
+          <Route
+            path="/"
+            element={
+              <Users />
+            }
+          />
+        </Route>
+      </Routes>
+    </AuthProvider>
   );
 }
 
-export default App;
+export let AuthContext = React.createContext(null)
+
+function AuthProvider({ children }) {
+  let [user, setUser] = React.useState(null);
+
+  let signin = (newUser, callback) => {
+    return fakeAuthProvider.signin(() => {
+      setUser(newUser);
+      callback();
+    });
+  };
+
+  let signout = (callback) => {
+    return fakeAuthProvider.signout(() => {
+      setUser(null);
+      callback();
+    });
+  };
+
+  let value = { user, signin, signout };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+export function useAuth() {
+  return React.useContext(AuthContext);
+}
+
+function RequireAuth({ children }) {
+  let auth = useAuth();
+  let location = useLocation();
+  console.log(auth.user)
+
+  if (!auth.user) {
+    // Redirect them to the /login page, but save the current location they were
+    // trying to go to when they were redirected. This allows us to send them
+    // along to that page after they login, which is a nicer user experience
+    // than dropping them off on the home page.
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return children;
+}

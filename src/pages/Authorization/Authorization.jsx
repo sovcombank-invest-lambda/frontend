@@ -1,21 +1,22 @@
 import React from 'react';
-import { Button, Form, Input, message } from 'antd';
+import { Button, Form, Input } from 'antd';
 import styles from './Authorization.module.scss'
-// import { useDispatch } from 'react-redux';
-// import { authorize } from '../../features/chat/chatSlice';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../App';
 
 const Authorization = () => {
   // const dispatch = useDispatch()
+  let navigate = useNavigate();
+  let location = useLocation();
+  let auth = useAuth();
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
-    // dispatch(authorize({ login: values.username, password: values.password }))
+  let from = location.state?.from?.pathname || '/';
 
-  };
-
-  const onFinishFailed = () => {
-    message.error('Неправильно введён логин или пароль')
-  };
+  function handleSubmit(event) {
+    auth.signin(event.username, () => {
+      navigate(from, { replace: true });
+    });
+  }
 
   return (
     <div className={styles.container}>
@@ -25,10 +26,9 @@ const Authorization = () => {
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
         layout="vertical"
+        onFinish={handleSubmit}
       >
         <Form.Item
           label="Имя пользователя"
