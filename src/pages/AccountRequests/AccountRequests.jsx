@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, Space, Table, Tooltip } from 'antd';
+import React from 'react'
+import { Button, Space, Table, Tooltip } from 'antd'
 
 const columns = [
   {
@@ -56,7 +56,7 @@ const columns = [
       </Space>
     ),
   },
-];
+]
 
 const data = [
   {
@@ -77,12 +77,10 @@ const data = [
     age: 33,
     address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
   },
-];
+]
 
 const AccountRequests = () => {
-  return (
-    <Table columns={columns} dataSource={data} />
-  );
-};
+  return <Table columns={columns} dataSource={data} />
+}
 
-export default AccountRequests;
+export default AccountRequests

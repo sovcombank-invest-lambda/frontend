@@ -1,21 +1,21 @@
-import React from 'react';
-import { Button, Form, Input } from 'antd';
+import React from 'react'
+import { Button, Form, Input } from 'antd'
 import styles from './Authorization.module.scss'
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../App';
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useAuth } from '../../App'
 
 const Authorization = () => {
   // const dispatch = useDispatch()
-  let navigate = useNavigate();
-  let location = useLocation();
-  let auth = useAuth();
+  let navigate = useNavigate()
+  let location = useLocation()
+  let auth = useAuth()
 
-  let from = location.state?.from?.pathname || '/';
+  let from = location.state?.from?.pathname || '/'
 
   function handleSubmit(event) {
     auth.signin(event.username, () => {
-      navigate(from, { replace: true });
-    });
+      navigate(from, { replace: true })
+    })
   }
 
   return (
@@ -51,7 +51,7 @@ const Authorization = () => {
         </Form.Item>
       </Form>
     </div>
-  );
-};
+  )
+}
 
-export default Authorization;
+export default Authorization

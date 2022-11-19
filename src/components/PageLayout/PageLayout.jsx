@@ -1,30 +1,33 @@
-import React from 'react';
-import Sider from 'antd/es/layout/Sider';
-import { Layout, Menu } from 'antd';
-import Header from '../Header/Header';
-import { Content, Footer } from 'antd/es/layout/layout';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { items } from './navItems';
+import React from 'react'
+import Sider from 'antd/es/layout/Sider'
+import { Layout, Menu } from 'antd'
+import Header from '../Header/Header'
+import { Content, Footer } from 'antd/es/layout/layout'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { items } from './navItems'
+import ProfileInfo from '../ProfileInfo/ProfileInfo'
 
 const PageLayout = () => {
-  let navigate = useNavigate();
+  let navigate = useNavigate()
 
   function handleMenuClick(e) {
     navigate(e.key)
   }
 
   return (
-    <Layout style={{minHeight: "100vh"}}>
+    <Layout style={{ minHeight: '100vh' }}>
       <Sider
         breakpoint="lg"
         collapsedWidth="0"
-        onBreakpoint={broken => {
-          console.log(broken);
+        width={300}
+        onBreakpoint={(broken) => {
+          console.log(broken)
         }}
         onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
+          console.log(collapsed, type)
         }}
       >
+        <ProfileInfo name={'Успенская Т. И.'} />
         <div className="logo" />
         <Menu
           theme="dark"
@@ -42,7 +45,7 @@ const PageLayout = () => {
         <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
       </Layout>
     </Layout>
-  );
-};
+  )
+}
 
-export default PageLayout;
+export default PageLayout
