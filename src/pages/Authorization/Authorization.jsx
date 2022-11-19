@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button, Form, Input, message } from 'antd';
 import styles from './Authorization.module.scss'
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 // import { authorize } from '../../features/chat/chatSlice';
 
 const Authorization = () => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -13,7 +13,7 @@ const Authorization = () => {
 
   };
 
-  const onFinishFailed = (errorInfo) => {
+  const onFinishFailed = () => {
     message.error('Неправильно введён логин или пароль')
   };
 
