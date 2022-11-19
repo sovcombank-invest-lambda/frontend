@@ -6,12 +6,11 @@ import ErrorPage from './pages/Error/Error';
 function App() {
   const router = createBrowserRouter([
     {
-      basename: "/frontend",
-      path: "/",
+      path: '/',
       element: <Authorization />,
       errorElement: <ErrorPage />,
     },
-  ]);
+  ], { basename: '/frontend' });
 
   return (
     <div className="App">
