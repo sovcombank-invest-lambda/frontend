@@ -3,10 +3,16 @@ import Sider from 'antd/es/layout/Sider';
 import { Layout, Menu } from 'antd';
 import Header from '../Header/Header';
 import { Content, Footer } from 'antd/es/layout/layout';
-import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { items } from './navItems';
 
 const PageLayout = () => {
+  let navigate = useNavigate();
+
+  function handleMenuClick(e) {
+    navigate(e.key)
+  }
+
   return (
     <Layout style={{minHeight: "100vh"}}>
       <Sider
@@ -23,14 +29,9 @@ const PageLayout = () => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={['4']}
-          items={[UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].map(
-            (icon, index) => ({
-              key: String(index + 1),
-              icon: React.createElement(icon),
-              label: `nav ${index + 1}`,
-            }),
-          )}
+          defaultSelectedKeys={'users'}
+          items={items}
+          onClick={handleMenuClick}
         />
       </Sider>
       <Layout>

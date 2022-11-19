@@ -9,17 +9,25 @@ import { fakeAuthProvider } from './auth';
 import Authorization from './pages/Authorization/Authorization';
 import Users from './pages/Users/Users';
 import PageLayout from './components/PageLayout/PageLayout';
+import AccountRequests from './pages/AccountRequests/AccountRequests';
 
 export default function App() {
   return (
     <AuthProvider>
       <Routes>
-          <Route path="/login" element={<Authorization />} />
+        <Route path="/login" element={<Authorization />} />
         <Route element={<RequireAuth><PageLayout /></RequireAuth>}>
+          <Route path="/" element={<Navigate to={'/users'} />} />
           <Route
-            path="/"
+            path="/users"
             element={
               <Users />
+            }
+          />
+          <Route
+            path="/requests"
+            element={
+              <AccountRequests />
             }
           />
         </Route>

@@ -1,22 +1,26 @@
 import React from 'react';
-import { Table, Tooltip } from 'antd';
+import { Button, Space, Table, Tooltip } from 'antd';
 
 const columns = [
   {
-    title: 'Name',
+    title: 'Имя',
     dataIndex: 'name',
     key: 'name',
-    render: (text) => <a>{text}</a>,
-    width: 150,
+    render: (text) => (
+      <Tooltip placement="topLeft" title={text}>
+        {text}
+      </Tooltip>
+    ),
+    width: 300,
   },
   {
-    title: 'Age',
+    title: 'Возраст',
     dataIndex: 'age',
     key: 'age',
-    width: 80,
+    width: 100,
   },
   {
-    title: 'Address',
+    title: 'Адрес',
     dataIndex: 'address',
     key: 'address 1',
     ellipsis: {
@@ -29,9 +33,9 @@ const columns = [
     ),
   },
   {
-    title: 'Long Column Long Column Long Column',
-    dataIndex: 'address',
-    key: 'address 2',
+    title: 'Информация',
+    dataIndex: 'info',
+    key: 'info',
     ellipsis: {
       showTitle: false,
     },
@@ -42,57 +46,43 @@ const columns = [
     ),
   },
   {
-    title: 'Long Column Long Column',
-    dataIndex: 'address',
-    key: 'address 3',
-    ellipsis: {
-      showTitle: false,
-    },
-    render: (address) => (
-      <Tooltip placement="topLeft" title={address}>
-        {address}
-      </Tooltip>
-    ),
-  },
-  {
-    title: 'Long Column',
-    dataIndex: 'address',
-    key: 'address 4',
-    ellipsis: {
-      showTitle: false,
-    },
-    render: (address) => (
-      <Tooltip placement="topLeft" title={address}>
-        {address}
-      </Tooltip>
+    title: 'Action',
+    key: 'action',
+    width: 260,
+    render: (_, record) => (
+      <Space size="middle">
+        <Button>Принять</Button>
+        <Button danger>Отклонить</Button>
+      </Space>
     ),
   },
 ];
+
 const data = [
   {
     key: '1',
     name: 'John Brown',
-    age: 32,
+    age: 33,
     address: 'New York No. 1 Lake Park, New York No. 1 Lake Park',
   },
   {
     key: '2',
     name: 'Jim Green',
-    age: 42,
+    age: 33,
     address: 'London No. 2 Lake Park, London No. 2 Lake Park',
   },
   {
     key: '3',
     name: 'Joe Black',
-    age: 32,
+    age: 33,
     address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
   },
 ];
 
-const Users = () => {
+const AccountRequests = () => {
   return (
     <Table columns={columns} dataSource={data} />
   );
 };
 
-export default Users;
+export default AccountRequests;
