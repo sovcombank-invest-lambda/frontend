@@ -1,9 +1,15 @@
+
 .usersContainer {
   display: grid;
   grid-template-columns: auto auto;
-  gap: 60px;
+  gap: 40px;
+  margin-bottom: 40px;
 }
 
 .search {
   margin-bottom: 40px;
+}
+
+.pagination {
+  float: right;
 }

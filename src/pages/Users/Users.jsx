@@ -3,6 +3,7 @@ import { USERS } from '../../mockData'
 import UserCard from '../../components/UserCard/UserCard'
 import styles from './Users.module.scss'
 import Search from 'antd/es/input/Search'
+import { Pagination } from 'antd';
 
 const Users = () => {
   function handleSearch(e) {
@@ -31,6 +32,7 @@ const Users = () => {
           />
         ))}
       </div>
+      <Pagination className={styles.pagination} defaultCurrent={1} total={USERS.length} />
     </div>
   )
 }

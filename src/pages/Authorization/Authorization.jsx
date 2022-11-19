@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../App'
 
 const Authorization = () => {
-  // const dispatch = useDispatch()
   let navigate = useNavigate()
   let location = useLocation()
   let auth = useAuth()
@@ -35,17 +34,17 @@ const Authorization = () => {
           name="username"
           rules={[{ required: true, message: 'Пожалуйста введите своё имя пользователя!' }]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
         <Form.Item
           label="Пароль"
           name="password"
           rules={[{ required: true, message: 'Пожалуйста введите свой пароль!' }]}
         >
-          <Input.Password />
+          <Input.Password size="large" />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" size="large">
             Войти
           </Button>
         </Form.Item>
