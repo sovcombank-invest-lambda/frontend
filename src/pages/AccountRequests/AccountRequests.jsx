@@ -49,7 +49,7 @@ const columns = [
     title: 'Action',
     key: 'action',
     width: 260,
-    render: (_, record) => (
+    render: (_) => (
       <Space size="middle">
         <Button>Принять</Button>
         <Button danger>Отклонить</Button>
