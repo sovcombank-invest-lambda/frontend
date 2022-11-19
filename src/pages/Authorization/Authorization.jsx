@@ -1,21 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Form, Input } from 'antd'
 import styles from './Authorization.module.scss'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../App'
+import { useDispatch, useSelector } from 'react-redux';
+import { authorize, selectIsAuthorized } from '../../features/auth/authSlice';
 
 const Authorization = () => {
   let navigate = useNavigate()
   let location = useLocation()
-  let auth = useAuth()
-
-  let from = location.state?.from?.pathname || '/'
-
+  const dispatch = useDispatch()
+  const isAuthorized = useSelector(selectIsAuthorized)
   function handleSubmit(event) {
-    auth.signin(event.username, () => {
-      navigate(from, { replace: true })
-    })
+    dispatch(authorize({ name: event.username, password: event.password }))
   }
+
+  useEffect(() => {
+    if (isAuthorized) {
+      let from = location.state?.from?.pathname || '/'
+      navigate(from, { replace: true })
+    }
+  }, [isAuthorized, navigate, location.state])
 
   return (
     <div className={styles.container}>

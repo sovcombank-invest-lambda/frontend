@@ -1,12 +1,11 @@
 import React from 'react'
 import styles from './Header.module.scss'
 import { Button } from 'antd'
-import { useAuth } from '../../App'
-import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { logout } from '../../features/auth/authSlice';
 
 const Header = () => {
-  let auth = useAuth()
-  let navigate = useNavigate()
+  const dispatch = useDispatch()
 
   return (
     <header className={styles.header}>
@@ -15,7 +14,7 @@ const Header = () => {
         <div className={styles.switch}>
           <Button
             onClick={() => {
-              auth.signout(() => navigate('/login'))
+              dispatch(logout())
             }}
           >
             Выйти
