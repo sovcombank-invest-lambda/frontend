@@ -5,6 +5,7 @@ import Authorization from './pages/Authorization/Authorization';
 function App() {
   const router = createBrowserRouter([
     {
+      basename: "/frontend",
       path: "/",
       element: <Authorization />,
     },
