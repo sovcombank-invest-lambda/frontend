@@ -1,15 +1,15 @@
 import React from 'react'
 import styles from './Header.module.scss'
 import { Button } from 'antd'
-import { useDispatch } from 'react-redux';
-import { logout } from '../../features/auth/authSlice';
+import { useDispatch } from 'react-redux'
+import { logout } from '../../features/auth/authSlice'
 
 const Header = () => {
   const dispatch = useDispatch()
 
   return (
     <header className={styles.header}>
-      <h2>Logo</h2>
+      <div></div>
       <div className={styles.headerRight}>
         <div className={styles.switch}>
           <Button

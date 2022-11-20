@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { Button, Form, Input } from 'antd'
 import styles from './Authorization.module.scss'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux';
-import { authorize, selectIsAuthorized } from '../../features/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux'
+import { authorize, selectIsAuthorized } from '../../features/auth/authSlice'
 
 const Authorization = () => {
   let navigate = useNavigate()

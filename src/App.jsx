@@ -4,7 +4,7 @@ import Authorization from './pages/Authorization/Authorization'
 import Users from './pages/Users/Users'
 import PageLayout from './components/PageLayout/PageLayout'
 import AccountRequests from './pages/AccountRequests/AccountRequests'
-import RequireAuth from './components/RequireAuth/RequireAuth';
+import RequireAuth from './components/RequireAuth/RequireAuth'
 
 export default function App() {
   return (

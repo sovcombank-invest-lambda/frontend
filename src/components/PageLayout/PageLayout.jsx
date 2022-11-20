@@ -6,6 +6,7 @@ import { Content, Footer } from 'antd/es/layout/layout'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { items } from './navItems'
 import ProfileInfo from '../ProfileInfo/ProfileInfo'
+import { faker } from '@faker-js/faker'
 
 const PageLayout = () => {
   let navigate = useNavigate()
@@ -27,7 +28,7 @@ const PageLayout = () => {
           console.log(collapsed, type)
         }}
       >
-        <ProfileInfo name={'Успенская Т. И.'} />
+        <ProfileInfo name={'Ширяева Е. Э.'} avatarUrl={faker.image.cats()} />
         <div className="logo" />
         <Menu
           theme="dark"
@@ -42,7 +43,7 @@ const PageLayout = () => {
         <Content style={{ margin: '24px 16px 0' }}>
           <Outlet />
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+        <Footer style={{ textAlign: 'center' }}></Footer>
       </Layout>
     </Layout>
   )

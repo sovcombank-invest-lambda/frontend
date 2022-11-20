@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Space, Table, Tooltip } from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
+import { getRequests, selectRequests } from '../../features/accountRequests/accountRequestsSlice'
 
 const columns = [
   {
@@ -11,13 +13,19 @@ const columns = [
         {text}
       </Tooltip>
     ),
-    width: 300,
+    width: 260,
   },
   {
     title: 'Возраст',
     dataIndex: 'age',
     key: 'age',
-    width: 100,
+    width: 90,
+  },
+  {
+    title: 'Номер',
+    dataIndex: 'phone',
+    key: 'phone',
+    width: 160,
   },
   {
     title: 'Адрес',
@@ -33,15 +41,16 @@ const columns = [
     ),
   },
   {
-    title: 'Информация',
-    dataIndex: 'info',
-    key: 'info',
+    title: 'Гражданство',
+    dataIndex: 'status',
+    key: 'status',
+    width: 260,
     ellipsis: {
       showTitle: false,
     },
-    render: (address) => (
-      <Tooltip placement="topLeft" title={address}>
-        {address}
+    render: (status) => (
+      <Tooltip placement="topLeft" title={status}>
+        {status}
       </Tooltip>
     ),
   },
@@ -58,29 +67,15 @@ const columns = [
   },
 ]
 
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 33,
-    address: 'New York No. 1 Lake Park, New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 33,
-    address: 'London No. 2 Lake Park, London No. 2 Lake Park',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 33,
-    address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
-  },
-]
-
 const AccountRequests = () => {
-  return <Table columns={columns} dataSource={data} />
+  const dispatch = useDispatch()
+  const accountRequests = useSelector(selectRequests)
+
+  useEffect(() => {
+    dispatch(getRequests())
+  }, [dispatch])
+
+  return <Table columns={columns} dataSource={accountRequests} />
 }
 
 export default AccountRequests

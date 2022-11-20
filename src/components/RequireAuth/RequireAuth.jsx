@@ -1,7 +1,7 @@
-import { Navigate, useLocation } from 'react-router-dom';
-import * as React from 'react';
-import { useSelector } from 'react-redux';
-import { selectIsAuthorized } from '../../features/auth/authSlice';
+import { Navigate, useLocation } from 'react-router-dom'
+import * as React from 'react'
+import { useSelector } from 'react-redux'
+import { selectIsAuthorized } from '../../features/auth/authSlice'
 
 export default function RequireAuth({ children }) {
   let location = useLocation()

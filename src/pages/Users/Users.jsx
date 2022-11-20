@@ -1,11 +1,19 @@
-import React from 'react'
-import { USERS } from '../../mockData'
+import React, { useEffect } from 'react'
 import UserCard from '../../components/UserCard/UserCard'
 import styles from './Users.module.scss'
 import Search from 'antd/es/input/Search'
-import { Pagination } from 'antd';
+import { Pagination } from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUsers, selectUsers } from '../../features/users/users'
 
 const Users = () => {
+  const dispatch = useDispatch()
+  const usersData = useSelector(selectUsers)
+
+  useEffect(() => {
+    dispatch(getUsers())
+  }, [dispatch])
+
   function handleSearch(e) {
     console.log(e)
   }
@@ -20,7 +28,7 @@ const Users = () => {
         size="large"
       />
       <div className={styles.usersContainer}>
-        {USERS.map((user) => (
+        {usersData?.map((user) => (
           <UserCard
             key={user.id}
             name={user.name}
@@ -29,10 +37,11 @@ const Users = () => {
             id={user.id}
             actives={user.actives}
             phoneNumber={user.number}
+            photoUrl={user.avatar}
           />
         ))}
       </div>
-      <Pagination className={styles.pagination} defaultCurrent={1} total={USERS.length} />
+      <Pagination className={styles.pagination} defaultCurrent={1} total={usersData?.length || 0} />
     </div>
   )
 }
