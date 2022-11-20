@@ -3,16 +3,21 @@ import { Button, Form, Input } from 'antd'
 import styles from './Authorization.module.scss'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { authorize, selectIsAuthorized } from '../../features/auth/authSlice'
+import { authorize, checkAuthorizationToken, selectIsAuthorized } from '../../features/auth/authSlice'
 
 const Authorization = () => {
   let navigate = useNavigate()
   let location = useLocation()
   const dispatch = useDispatch()
   const isAuthorized = useSelector(selectIsAuthorized)
+
   function handleSubmit(event) {
     dispatch(authorize({ name: event.username, password: event.password }))
   }
+
+  useEffect(() => {
+    dispatch(checkAuthorizationToken())
+  }, [dispatch])
 
   useEffect(() => {
     if (isAuthorized) {

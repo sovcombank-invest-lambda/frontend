@@ -11,6 +11,7 @@ export const authorize = createAsyncThunk('auth/authorize', async ({ login, pass
     // const response = await authorizationRequest({ login, password })
     // localStorage.setItem('token', response.jwtToken)
     // return response
+    localStorage.setItem('is_authorized', 'TRUE')
     return true
     // eslint-disable-next-line no-unreachable
   } catch (error) {
@@ -22,7 +23,8 @@ export const authorize = createAsyncThunk('auth/authorize', async ({ login, pass
 })
 
 export const checkAuthorizationToken = createAsyncThunk('auth/checkAuthorization', async () => {
-  return true
+  let isAuthorized = localStorage.getItem('is_authorized')
+  return isAuthorized === 'TRUE'
   // const token = localStorage.getItem('token')
   // if (!token) return;
   // return await checkAuthorizationTokenRequest(token)
@@ -33,6 +35,7 @@ export const chatSlice = createSlice({
   initialState,
   reducers: {
     logout(state) {
+      localStorage.removeItem('is_authorized')
       state.isAuthorized = false
       localStorage.removeItem('token')
     },
@@ -45,7 +48,7 @@ export const chatSlice = createSlice({
       })
       .addCase(checkAuthorizationToken.fulfilled, (state, action) => {
         state.userId = action.payload.userId
-        state.isAuthorized = true
+        state.isAuthorized = action.payload
       })
       .addCase(checkAuthorizationToken.rejected, (state) => {
         state.isAuthorized = false
